@@ -13,8 +13,8 @@ const SEGMENT_TEST_DATA = {
 const openSegmentsList = async (page) => {
     await expect(page.getByText('Audience')).toBeVisible({ timeout: config.TIMEOUT });
     await page.getByText('Audience').click();
-    await expect(page.getByRole('link', { name: 'people Segments Group' })).toBeVisible({ timeout: config.TIMEOUT });
-    await page.getByRole('link', { name: 'people Segments Group' }).click();
+    await expect(page.getByRole('link', { name: 'Account Segments' })).toBeVisible({ timeout: config.TIMEOUT });
+    await page.getByRole('link', { name: 'Account Segments' }).click();
 };
 
 const createSegmentAndVerifyInList = async (page, segmentData = SEGMENT_TEST_DATA, accountData = ACCOUNT_TEST_DATA) => {
