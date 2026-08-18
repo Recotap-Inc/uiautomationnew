@@ -1,0 +1,54 @@
+{
+  "validCredentials": {
+    "email": "divya@recotap.com",
+    "password": "Test@123"
+  },
+  "invalidCredentials": [
+    {
+      "email": "invalid@recotap.com",
+      "password": "WrongPass123",
+      "description": "Invalid email and password"
+    },
+    {
+      "email": "divya@recotap.com",
+      "password": "WrongPass123",
+      "description": "Valid email, invalid password"
+    },
+    {
+      "email": "invalid@recotap.com",
+      "password": "Test@123",
+      "description": "Invalid email, valid password"
+    }
+  ],
+  "invalidEmails": [
+    "notanemail",
+    "test@",
+    "@domain.com",
+    "test space@domain.com",
+    "test..double@domain.com",
+    "test@domain",
+    "test@.com"
+  ],
+  "securityPayloads": {
+    "xss": [
+      "<script>alert('XSS')</script>",
+      "<img src=x onerror=alert('XSS')>",
+      "javascript:alert('XSS')",
+      "<svg/onload=alert('XSS')>"
+    ],
+    "sqlInjection": [
+      "' OR '1'='1",
+      "'; DROP TABLE users--",
+      "admin'--",
+      "' OR 1=1--"
+    ]
+  },
+  "edgeCases": {
+    "longEmail": "verylongemailaddressthatexceedsthemaximumlengthfortesting@verylongdomainname.com",
+    "longPassword": "ThisIsAVeryLongPasswordThatExceedsTheMaximumLengthForTestingPurposes123!@#",
+    "specialCharactersEmail": "test+tag@example.com",
+    "unicodeEmail": "test@tëst.com",
+    "emptyEmail": "",
+    "emptyPassword": ""
+  }
+}

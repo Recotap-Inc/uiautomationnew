@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Reports and Logs
+reports/logs/*.log
+reports/screenshots/*.png
+reports/*.json
+reports/*.xml
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test artifacts
+/test-results/
+*.mp4
+*.webm
+trace.zip

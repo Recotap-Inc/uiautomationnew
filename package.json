@@ -1,0 +1,42 @@
+{
+  "name": "recotap-ui",
+  "version": "1.0.0",
+  "description": "Playwright Test Framework for Recotap UI",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:login": "playwright test tests/login.spec.js",
+    "test:regression": "playwright test --config=playwright.regression.config.js",
+    "test:regression:chrome": "playwright test --config=playwright.regression.config.js --project=chromium",
+    "test:chromium": "playwright test --project=chromium",
+    "test:firefox": "playwright test --project=firefox",
+    "test:webkit": "playwright test --project=webkit",
+    "test:mobile": "playwright test --project='Mobile Chrome' --project='Mobile Safari'",
+    "test:parallel": "playwright test --workers=4",
+    "test:serial": "playwright test --workers=1",
+    "test:dev": "TEST_ENV=dev playwright test",
+    "test:staging": "TEST_ENV=staging playwright test",
+    "test:prod": "TEST_ENV=production playwright test",
+    "report": "playwright show-report",
+    "report:open": "open playwright-report/index.html",
+    "install:browsers": "playwright install",
+    "clean:reports": "rm -rf playwright-report test-results reports/logs/*.log",
+    "clean:all": "rm -rf playwright-report test-results node_modules && npm install"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "e2e",
+    "automation"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.2.3"
+  }
+}
