@@ -45,6 +45,35 @@ const openCampaignsList = async (page) => {
     await expect(page.getByRole('heading', { name: 'Campaigns', level: 1 })).toBeVisible({ timeout: config.TIMEOUT });
 };
 
+// Fills only the Create Campaign modal (name + optional type/goal/ad format) and
+// lands on Configure Campaign — the shared "arrange" step for modal-validation specs
+// that don't need the full activate-a-campaign flow in createCampaign().
+const createCampaignDraft = async (page, { name, campaignType, goalType, adType } = {}) => {
+    await openCampaignsList(page);
+
+    const createButton = page.getByRole('button', { name: 'Create Campaign' });
+    await createButton.first().click();
+    await expect(page.getByTitle('Create Campaign')).toBeVisible({ timeout: config.TIMEOUT });
+
+    const nameBox = page.getByRole('textbox', { name: 'Enter campaign name' });
+    await nameBox.click();
+    await nameBox.fill(name);
+
+    if (campaignType) {
+        await page.locator(`label[for="create_update_campaign_type_${campaignType}"]`).click();
+    }
+    if (goalType) {
+        await page.locator(`label[for="create_update_goal_type_${goalType}"]`).click();
+    }
+    if (adType) {
+        await page.locator(`label[for="create_update_ad_type_${adType}"]`).click();
+    }
+
+    await page.getByRole('button', { name: 'Next' }).click();
+    await expect(page.getByRole('heading', { name: 'Configure Campaign' })).toBeVisible({ timeout: config.TIMEOUT });
+    await expect(page.getByRole('heading', { name })).toBeVisible({ timeout: config.TIMEOUT });
+};
+
 const createCampaign = async (page, segmentName = SEGMENT_TEST_DATA.name, adName = AD_TEST_DATA.name) => {
     logger.testStart('should create a new campaign successfully');
 
@@ -251,4 +280,4 @@ const createCampaign = async (page, segmentName = SEGMENT_TEST_DATA.name, adName
     logger.testEnd('should create a new campaign successfully', 'passed');
 };
 
-module.exports = { createCampaign, openCampaignsList };
+module.exports = { createCampaign, createCampaignDraft, openCampaignsList };
